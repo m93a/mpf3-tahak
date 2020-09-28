@@ -1,0 +1,90 @@
+% !TEX program = xelatex
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+
+\def\Cont{\mathcal{C}}
+\def\Schwartz{\mathcal{S}}
+
+\def\Fourier{\mathcal{F}}
+\def\Laplace{\mathcal{L}}
+\def\Parity{\mathcal{P}}
+
+\newcommand{\T}[1]{\mathrm{T}_{#1}}
+\renewcommand{\S}[1]{\mathrm{S}_{#1}}
+\newcommand{\D}[1]{\mathrm{D}^{#1}}
+
+\def\I{\mathrm{i}}
+\newcommand{\e}[1]{\mathrm{e}^{#1}}
+\renewcommand{\d}[1]{\mathrm{d}#1 \,}
+
+\newcommand{\setbuilder}[2]{\left\{ #1 \;\middle|\; #2 \right\}}
+
+
+\begin{document}
+
+\section{Fourier a Laplace na funkcích}
+\subsection{Zavedení}
+\begin{gather*}
+    \Fourier: \Schwartz(\R) \to \Schwartz(\R)
+    \\
+    \Fourier: L^1(\R) \to L^\infty(\R)
+    \\
+    \Fourier: L^2(\R) \to L^2(\R)
+    \\
+    \Fourier f =
+    \xi \mapsto
+    \lim_{R\to\infty}
+    \int_{-R}^{+R} f(x) \, \e{-2\pi\I\xi x} \, \d{x}
+    \\\\
+    \Laplace: L^+ \to H^+
+    \\[5pt]
+    L^+ = \setbuilder{f \in L_{\mathrm{loc}}^1((0,\infty))}{\exists c>0: \e{-ct}f(t) \in L^1((0,\infty))}
+    \\
+    H^+ = \setbuilder{f: \C \to \C}{\exists c>0: f(z)\text{ je holo. na }\Re z \ge c}
+    \\[5pt]
+    \Laplace f =
+    p \mapsto
+    \int_0^\infty
+    f(t) \, \e{-pt} \, \d{t}
+\end{gather*}
+
+\subsection{Vlastnosti}
+\begin{align*}
+    \T{\alpha} &= f(t) \mapsto f(t-\alpha)
+    \\
+    \S{\alpha} &= f(t) \mapsto f(\alpha \, t)
+    \\
+    \D{k} &= f(t) \mapsto f^{(k)}(t)
+    \\
+    \Parity \, &= f(t) \mapsto f(-t) = \S{-1}
+\end{align*}
+\begin{align*}
+    \Fourier^{-1} &= \Parity \Fourier
+    \\
+\end{align*}
+\begin{align*}
+    \Laplace \, \S{\alpha}
+    &= \alpha^{-1} \, \S{\alpha^{-1}} \, \Laplace
+    \\
+    \Laplace \, \T{\alpha}
+    &= \e{-\alpha \hat t} \, \Laplace
+    & & \text{pro } \alpha > 0
+    \\
+    \Laplace \, \e{\alpha \hat t}
+    &= \T{\alpha} \, \Laplace
+    \\
+    \Laplace \, \D{k}
+    &= \hat t^k \, \Laplace
+    & & \text{pro } f \in \Cont^k, \; f^{(j)} \in L^+
+    \\
+    \Laplace \, \hat t^k \;
+    &= (-1)^k \; \D{k} \, \Laplace
+\end{align*}
+
+\end{document}
